@@ -1,28 +1,28 @@
 require "ornare/version"
+
 require "f1sales_custom/parser"
 require "f1sales_custom/source"
 
-
 module Ornare
   
-  class LeadSource < F1SalesCustom::Email::Source
+  class F1SalesCustom::Email::Source
     def self.all
       [
         {
-          email_id: 'website-form',
+          email_id: 'websiteform',
           name: 'Vendas - SP'
         }
       ]
     end 
   end
 
-  class WebsiteFormParser < F1SalesCustom::Email::Parser
+  class F1SalesCustom::Email::Parser
     def parse
       parsed_email = @email.body.colons_to_hash
       state = parsed_email['estado'].split("\n").first
       message = @email.body.split('Estado').last.split("\n").drop(1).join("\n")
       department = @email.subject.split(':').first
-      source = LeadSource.all.select { |source| source[:name] == "#{department.capitalize} - #{state.upcase}" }.first
+      source = F1SalesCustom::Email::Source.all.select { |source| source[:name] == "#{department.capitalize} - #{state.upcase}" }.first
       source_name = source[:name]
 
       {
@@ -66,6 +66,3 @@ class String
     result
   end 
 end
-
-
-
