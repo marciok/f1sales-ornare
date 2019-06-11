@@ -33,6 +33,10 @@ RSpec.describe F1SalesCustom::Email::Parser do
         expect(parsed_email[:customer][:phone]).to eq('11983760878')
       end
 
+      it 'contains product' do
+        expect(parsed_email[:product]).to eq('Vendas')
+      end
+
       it 'contains a message' do
         expect(parsed_email[:message]).to eq("\nOlá Equipe Ornare,\n\nEstou tentando um contato na loja mais próxima da minha casa, mas parece\nque os telefones abaixo não funcionam:\n\nSão Paulo – Gabriel Monteiro da Silva\nAl. Gabriel Monteiro da Silva, 1101 – Jd. Paulistano\n2ª a 6ª das 10h às 20h e sáb. das 10h às 14h\nTel.: +55 (11) 3065.6622\nAssistência Técnica: +55 (11) 3090.3250\n\nAntes de enviar o orçamento, eu gostaria de conversar com alguém da loja\nlocalizada no Jd. Paulistano.\n\nObrigada,\nCarolina Martins")
       end

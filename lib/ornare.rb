@@ -34,7 +34,7 @@ module Ornare
           phone: parsed_email['telefone'].tr('^0-9', ''),
           email: parsed_email['email']
         },
-        product: '',
+        product: department.capitalize,
         message: message,
       }
     end
