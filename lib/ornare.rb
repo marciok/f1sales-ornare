@@ -10,7 +10,7 @@ module Ornare
       [
         {
           email_id: 'websiteform',
-          name: 'Vendas - SP'
+          name: 'Formulário Site - Vendas - SP'
         }
       ]
     end 
@@ -22,7 +22,7 @@ module Ornare
       state = parsed_email['estado'].split("\n").first
       message = @email.body.split('Estado').last.split("\n").drop(1).join("\n")
       department = @email.subject.split(':').first
-      source = F1SalesCustom::Email::Source.all.select { |source| source[:name] == "#{department.capitalize} - #{state.upcase}" }.first
+      source = F1SalesCustom::Email::Source.all.select { |source| source[:name] == "Formulário Site - #{department.capitalize} - #{state.upcase}" }.first
       source_name = source[:name]
 
       {
