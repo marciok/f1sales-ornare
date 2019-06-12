@@ -2,6 +2,7 @@ require "ornare/version"
 
 require "f1sales_custom/parser"
 require "f1sales_custom/source"
+require "f1sales_helpers"
 
 module Ornare
   
@@ -10,7 +11,7 @@ module Ornare
       [
         {
           email_id: 'websiteform',
-          name: 'Formulário Site - Vendas - SP'
+          name: 'Site - Vendas - SP'
         }
       ]
     end 
@@ -22,7 +23,7 @@ module Ornare
       state = parsed_email['estado'].split("\n").first
       message = @email.body.split('Estado').last.split("\n").drop(1).join("\n")
       department = @email.subject.split(':').first
-      source = F1SalesCustom::Email::Source.all.select { |source| source[:name] == "Formulário Site - #{department.capitalize} - #{state.upcase}" }.first
+      source = F1SalesCustom::Email::Source.all.select { |source| source[:name] == "Site - #{department.capitalize} - #{state.upcase}" }.first
       source_name = source[:name]
 
       {
@@ -40,29 +41,4 @@ module Ornare
     end
 
   end
-end
-
-#TODO Move this to common helper
-class String
-  def colons_to_hash(split_exp = /(\n[A-Z].*?:)/, insert_line_break = true)
-    insert(0, "\n") if insert_line_break
-    gsub!('*', '')
-    data = split(split_exp).drop(1)
-    is_key = true
-    key = ''
-    result = {}
-    data.each do |content|
-      if is_key
-        key = content.downcase.gsub(/[^0-9a-z ]/i, '')
-        key.gsub!(' ', '_')
-        result[key] = '' if result[key].nil? or result[key] == ''
-      else
-        result[key] = content.strip if result[key] == ''
-      end
-
-      is_key = !is_key
-    end
-
-    result
-  end 
 end

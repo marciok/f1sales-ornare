@@ -1,5 +1,14 @@
-PATH
-  remote: ../f1sales_custom-email
+GIT
+  remote: https://github.com/f1sales/f1sales_helpers
+  revision: 3c3f8eb9679b4e6296f8929fb8a20813936b8205
+  branch: master
+  specs:
+    f1sales_helpers (0.1.0)
+
+GIT
+  remote: https://github.com/marciok/f1sales_custom-email
+  revision: 6cad18ba9095284c15da97d7afd50aa47cc711a8
+  branch: master
   specs:
     f1sales_custom-email (0.1.0)
 
@@ -8,6 +17,7 @@ PATH
   specs:
     ornare (0.1.2)
       f1sales_custom-email
+      f1sales_helpers
 
 GEM
   remote: https://rubygems.org/
@@ -34,6 +44,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.16)
   f1sales_custom-email!
+  f1sales_helpers!
   ornare!
   rake (~> 10.0)
   rspec (~> 3.0)
